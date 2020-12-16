@@ -16,7 +16,7 @@ import (
 )
 
 // CreateHost 创建主机
-func CreateHost(name, imageID, zone, region string) error {
+func CreateHost(name, imageID, zone string) error {
 
 	h := config.Cfg.Host
 	pwd, err := password.Generate(16, 5, 5, false, false)
@@ -24,7 +24,7 @@ func CreateHost(name, imageID, zone, region string) error {
 	req.Zone = ucloud.String(zone)
 	req.ImageId = ucloud.String(imageID)
 	req.Password = ucloud.String(pwd)
-	req.LoginMode = ucloud.String(h.LoginMode)
+	req.LoginMode = ucloud.String("Password")
 	req.Name = ucloud.String(name)
 	req.ChargeType = ucloud.String(h.ChargeType)
 	req.CPU = ucloud.Int(h.CPU)
@@ -32,13 +32,12 @@ func CreateHost(name, imageID, zone, region string) error {
 	req.NetCapability = ucloud.String(h.NetCapability)
 	req.MachineType = ucloud.String(h.MachineType)
 	req.MinimalCpuPlatform = ucloud.String(h.MinimalCpuPlatform)
-	operatorName := fmt.Sprintf("Bgp %s", region)
 	req.NetworkInterface = []uhost.CreateUHostInstanceParamNetworkInterface{
 		{
 			EIP: &uhost.CreateUHostInstanceParamNetworkInterfaceEIP{
 				Bandwidth:    ucloud.Int(h.NetworkInterface[0].Bandwidth),
 				PayMode:      ucloud.String(h.NetworkInterface[0].PayMode),
-				OperatorName: ucloud.String(operatorName),
+				OperatorName: ucloud.String("Bgp"),
 				GlobalSSH: &uhost.CreateUHostInstanceParamNetworkInterfaceEIPGlobalSSH{
 					Port: ucloud.Int(22),
 				},
