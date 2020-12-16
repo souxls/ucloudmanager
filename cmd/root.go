@@ -33,7 +33,7 @@ var Uclient = ucloud.Uclient(Region)
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "ucloudmanager",
-	Short: "Manage ucloud host ",
+	Short: "Manage ucloud host and image",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
