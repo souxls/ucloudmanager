@@ -24,7 +24,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var listHost, all bool
 var uhostName, imageName, zoneName string
 
 // uhostCmd represents the uhost command
@@ -103,5 +102,4 @@ func init() {
 	stopUhostCmd.MarkPersistentFlagRequired("hostID")
 
 	uhostCmd.AddCommand(listUhostCmd)
-	listUhostCmd.PersistentFlags().BoolVar(&listHost, "list", true, "List uhost of region.")
 }
