@@ -23,7 +23,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var imageList bool
 var imgageName, imageID string
 
 // imageCmd represents the image command
@@ -76,6 +75,4 @@ func init() {
 	deleteImageCmd.MarkPersistentFlagRequired("imageID")
 
 	imageCmd.AddCommand(listImageCmd)
-	listImageCmd.PersistentFlags().BoolVar(&imageList, "list", true, "list image by region.")
-
 }

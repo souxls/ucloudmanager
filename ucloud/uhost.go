@@ -32,7 +32,7 @@ func CreateHost(name, imageID, zone, region string) error {
 	req.NetCapability = ucloud.String(h.NetCapability)
 	req.MachineType = ucloud.String(h.MachineType)
 	req.MinimalCpuPlatform = ucloud.String(h.MinimalCpuPlatform)
-	operatorName := fmt.Sprintf("BGP %s", region)
+	operatorName := fmt.Sprintf("Bgp %s", region)
 	req.NetworkInterface = []uhost.CreateUHostInstanceParamNetworkInterface{
 		{
 			EIP: &uhost.CreateUHostInstanceParamNetworkInterfaceEIP{
