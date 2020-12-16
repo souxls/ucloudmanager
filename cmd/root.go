@@ -21,14 +21,18 @@ import (
 	"os"
 
 	"ucloudmanager/config"
-	"ucloudmanager/log"
 	"ucloudmanager/ucloud"
 
 	"github.com/spf13/cobra"
 )
 
-var cfgFile, Region, HostID string
-var Uclient = ucloud.Uclient(Region)
+// Region set ucloud region
+var Region string
+
+// HostID set General variable
+var HostID string
+
+var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -54,5 +58,5 @@ func init() {
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
 	config.Init(cfgFile)
-	log.Init()
+	ucloud.Client(Region)
 }

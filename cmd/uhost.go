@@ -37,7 +37,7 @@ var createUhostCmd = &cobra.Command{
 	Use:   "create",
 	Short: "create uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.CreateHost(Uclient, uhostName, imageName, zoneName); err != nil {
+		if err := ucloud.CreateHost(uhostName, imageName, zoneName); err != nil {
 			fmt.Println("Host创建失败", err)
 		}
 	},
@@ -46,7 +46,7 @@ var deleteUhostCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "delete uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.DeleteHost(Uclient, &HostID); err != nil {
+		if err := ucloud.DeleteHost(&HostID); err != nil {
 			fmt.Println("Host删除失败", err)
 		}
 	},
@@ -56,7 +56,7 @@ var listUhostCmd = &cobra.Command{
 	Use:   "list",
 	Short: "list uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		ucloud.GetHostIDs(Uclient)
+		ucloud.GetHostIDs()
 	},
 }
 
@@ -64,7 +64,7 @@ var startUhostCmd = &cobra.Command{
 	Use:   "start",
 	Short: "start uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.StartHost(Uclient, &HostID); err != nil {
+		if err := ucloud.StartHost(&HostID); err != nil {
 			fmt.Println("Host启动失败", err)
 		}
 	},
@@ -74,7 +74,7 @@ var stopUhostCmd = &cobra.Command{
 	Use:   "stop",
 	Short: "stop uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.StopHost(Uclient, &HostID); err != nil {
+		if err := ucloud.StopHost(&HostID); err != nil {
 			fmt.Println("Host停止失败", err)
 
 		}

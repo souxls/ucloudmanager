@@ -5,16 +5,17 @@ import (
 	"ucloudmanager/log"
 
 	"github.com/ucloud/ucloud-sdk-go/services/uhost"
+	"github.com/ucloud/ucloud-sdk-go/ucloud"
 )
 
 // CreateImage 创建镜像
-func CreateImage(uhostClient *uhost.UHostClient, imageName *string, uhostID *string) error {
+func CreateImage(imageName *string, uhostID *string) error {
 
-	req := uhostClient.NewCreateCustomImageRequest()
+	req := Uclient.NewCreateCustomImageRequest()
 	req.ImageName = imageName
 	req.UHostId = uhostID
 
-	resp, err := uhostClient.CreateCustomImage(req)
+	resp, err := Uclient.CreateCustomImage(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return err
@@ -26,12 +27,12 @@ func CreateImage(uhostClient *uhost.UHostClient, imageName *string, uhostID *str
 }
 
 // DeleteImage 删除镜像
-func DeleteImage(uhostClient *uhost.UHostClient, imageID *string) error {
+func DeleteImage(imageID *string) error {
 
-	req := uhostClient.NewTerminateCustomImageRequest()
+	req := Uclient.NewTerminateCustomImageRequest()
 	req.ImageId = imageID
 
-	resp, err := uhostClient.TerminateCustomImage(req)
+	resp, err := Uclient.TerminateCustomImage(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return err
@@ -43,18 +44,19 @@ func DeleteImage(uhostClient *uhost.UHostClient, imageID *string) error {
 }
 
 // GetImages 获取镜像列表
-func GetImages(uhostClient *uhost.UHostClient) []uhost.UHostImageSet {
+func GetImages() []uhost.UHostImageSet {
 
-	req := uhostClient.NewDescribeImageRequest()
+	req := Uclient.NewDescribeImageRequest()
+	req.ImageType = ucloud.String("Custom")
 
-	resp, err := uhostClient.DescribeImage(req)
+	resp, err := Uclient.DescribeImage(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return nil
 	}
 
 	for i := 0; i < len(resp.ImageSet); i++ {
-		fmt.Printf("ImageName: %s ImageID: %s", resp.ImageSet[i].ImageId, resp.ImageSet[i].ImageName)
+		fmt.Printf("ImageID: %s ImageName: %s \n", resp.ImageSet[i].ImageId, resp.ImageSet[i].ImageName)
 	}
 
 	return resp.ImageSet

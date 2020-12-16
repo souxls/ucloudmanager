@@ -12,15 +12,15 @@ MachineType = "O"
 MinimalCpuPlatform = "Intel/Auto"
 NetworkInterface = [
 	{
-		Bandwidth:    100,
-		PayMode:      "Traffic",
-		OperatorName: "Bgp cn-sh2"
+		Bandwidth =   100,
+		PayMode =    "Traffic",
+		OperatorName = "Bgp cn-sh2"
 	},
 ]
 Disks = [
 	{
-		IsBoot: "True",
-		Size:   20,
-		Type:   "CLOUD_RSSD"
+		IsBoot = "True",
+		Size = 20,
+		Type =  "CLOUD_RSSD"
 	},
 ]
