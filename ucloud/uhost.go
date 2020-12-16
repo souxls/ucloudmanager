@@ -122,7 +122,7 @@ func GetHostIDs() []uhost.UHostInstanceSet {
 	}
 
 	for i := 0; i < len(resp.UHostSet); i++ {
-		fmt.Println(resp.UHostSet[i].UHostId)
+		fmt.Printf("HostID: %s HostName: %s \n", resp.UHostSet[i].UHostId, resp.UHostSet[i].Name)
 	}
 
 	return resp.UHostSet
