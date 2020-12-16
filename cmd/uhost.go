@@ -37,7 +37,7 @@ var createUhostCmd = &cobra.Command{
 	Use:   "create",
 	Short: "create uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.CreateHost(uhostName, imageName, zoneName); err != nil {
+		if err := ucloud.CreateHost(uhostName, imageName, zoneName, Region); err != nil {
 			fmt.Println("Host创建失败", err)
 		}
 	},
@@ -86,7 +86,7 @@ func init() {
 	uhostCmd.AddCommand(createUhostCmd)
 	createUhostCmd.PersistentFlags().StringVar(&uhostName, "name", "", "uhost name.")
 	createUhostCmd.PersistentFlags().StringVar(&imageName, "image", "", "image id.")
-	createUhostCmd.PersistentFlags().StringVar(&zoneName, "zone", "cn-sh2-01", "zone name.  Support cn-bj1-01,cn-bj1-02,cn-bj1-03,cn-bj1-04,cn-bj1-05, cn-sh2-01, cn-sh2-02,cn-sh2-03")
+	createUhostCmd.PersistentFlags().StringVar(&zoneName, "zone", "cn-sh2-01", "zone name.  Support cn-bj2-01,cn-bj2-02,cn-bj2-03,cn-bj2-04,cn-bj2-05, cn-sh2-01, cn-sh2-02,cn-sh2-03")
 	createUhostCmd.MarkPersistentFlagRequired("zone")
 	createUhostCmd.MarkPersistentFlagRequired("image")
 
