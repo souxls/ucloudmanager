@@ -36,7 +36,7 @@ var createImageCmd = &cobra.Command{
 	Use:   "create",
 	Short: "create image",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.CreateImage(Uclient, &imgageName, &HostID); err != nil {
+		if err := ucloud.CreateImage(&imgageName, &HostID); err != nil {
 			fmt.Printf("镜像创建失败")
 
 		}
@@ -47,7 +47,7 @@ var deleteImageCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "delete image",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.DeleteImage(Uclient, &imageID); err != nil {
+		if err := ucloud.DeleteImage(&imageID); err != nil {
 			fmt.Println("镜像删除失败", err)
 
 		}
@@ -58,10 +58,7 @@ var listImageCmd = &cobra.Command{
 	Use:   "list",
 	Short: "list image",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.GetImages(Uclient); err != nil {
-			fmt.Println("镜像获取失败", err)
-
-		}
+		ucloud.GetImages()
 	},
 }
 

@@ -11,8 +11,11 @@ import (
 // BaseURL ucloud api接口
 var BaseURL = "https://api.ucloud.cn"
 
-// Uclient 初始化 ucloud 客户端
-func Uclient(region string) *uhost.UHostClient {
+// Uclient 构建请求客户端
+var Uclient *uhost.UHostClient
+
+// Client 初始化 ucloud 客户端
+func Client(region string) {
 
 	cfg := ucloud.NewConfig()
 	cfg.Region = region
@@ -22,7 +25,5 @@ func Uclient(region string) *uhost.UHostClient {
 	cred := auth.NewCredential()
 	cred.PublicKey = "" c.PublicKey
 	cred.PrivateKey = c.PrivateKey
-
-	uhostClient := uhost.NewClient(&cfg, &cred)
-	return uhostClient
+	Uclient = uhost.NewClient(&cfg, &cred)
 }

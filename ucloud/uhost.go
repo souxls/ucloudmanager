@@ -16,11 +16,11 @@ import (
 )
 
 // CreateHost 创建主机
-func CreateHost(uhostClient *uhost.UHostClient, name, imageID, zone string) error {
+func CreateHost(name, imageID, zone string) error {
 
 	h := config.Cfg.Host
 	pwd, err := password.Generate(16, 5, 5, false, false)
-	req := uhostClient.NewCreateUHostInstanceRequest()
+	req := Uclient.NewCreateUHostInstanceRequest()
 	req.Zone = ucloud.String(zone)
 	req.ImageId = ucloud.String(imageID)
 	req.Password = ucloud.String(pwd)
@@ -31,13 +31,13 @@ func CreateHost(uhostClient *uhost.UHostClient, name, imageID, zone string) erro
 	req.Memory = ucloud.Int(h.Memory)
 	req.NetCapability = ucloud.String(h.NetCapability)
 	req.MachineType = ucloud.String(h.MachineType)
-	req.MinimalCpuPlatform = ucloud.String(h.MinimalCPUPlatform)
+	req.MinimalCpuPlatform = ucloud.String(h.MinimalCpuPlatform)
 	req.NetworkInterface = []uhost.CreateUHostInstanceParamNetworkInterface{
 		{
 			EIP: &uhost.CreateUHostInstanceParamNetworkInterfaceEIP{
-				Bandwidth:    ucloud.Int(h.NetworkInterface.Bandwidth),
-				PayMode:      ucloud.String(h.NetworkInterface.PayMode),
-				OperatorName: ucloud.String(h.NetworkInterface.OperatorName),
+				Bandwidth:    ucloud.Int(h.NetworkInterface[0].Bandwidth),
+				PayMode:      ucloud.String(h.NetworkInterface[0].PayMode),
+				OperatorName: ucloud.String(h.NetworkInterface[0].OperatorName),
 				GlobalSSH: &uhost.CreateUHostInstanceParamNetworkInterfaceEIPGlobalSSH{
 					Port: ucloud.Int(22),
 				},
@@ -46,13 +46,13 @@ func CreateHost(uhostClient *uhost.UHostClient, name, imageID, zone string) erro
 	}
 	req.Disks = []uhost.UHostDisk{
 		{
-			IsBoot: ucloud.String(h.Disks.IsBoot),
-			Size:   ucloud.Int(h.Disks.Size),
-			Type:   ucloud.String(h.Disks.Type),
+			IsBoot: ucloud.String(h.Disks[0].IsBoot),
+			Size:   ucloud.Int(h.Disks[0].Size),
+			Type:   ucloud.String(h.Disks[0].Type),
 		},
 	}
 
-	resp, err := uhostClient.CreateUHostInstance(req)
+	resp, err := Uclient.CreateUHostInstance(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return err
@@ -62,12 +62,12 @@ func CreateHost(uhostClient *uhost.UHostClient, name, imageID, zone string) erro
 }
 
 // StartHost 启动 uhost
-func StartHost(uhostClient *uhost.UHostClient, uHostID *string) error {
+func StartHost(uHostID *string) error {
 
-	req := uhostClient.NewStartUHostInstanceRequest()
+	req := Uclient.NewStartUHostInstanceRequest()
 	req.UHostId = uHostID
 
-	resp, err := uhostClient.StartUHostInstance(req)
+	resp, err := Uclient.StartUHostInstance(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return err
@@ -78,12 +78,12 @@ func StartHost(uhostClient *uhost.UHostClient, uHostID *string) error {
 }
 
 // StopHost 停止 uHost
-func StopHost(uhostClient *uhost.UHostClient, uhostID *string) error {
+func StopHost(uhostID *string) error {
 
-	req := uhostClient.NewStopUHostInstanceRequest()
+	req := Uclient.NewStopUHostInstanceRequest()
 	req.UHostId = uhostID
 
-	resp, err := uhostClient.StopUHostInstance(req)
+	resp, err := Uclient.StopUHostInstance(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return err
@@ -94,12 +94,12 @@ func StopHost(uhostClient *uhost.UHostClient, uhostID *string) error {
 }
 
 // DeleteHost 删除 uhost
-func DeleteHost(uhostClient *uhost.UHostClient, uhostID *string) error {
+func DeleteHost(uhostID *string) error {
 
-	req := uhostClient.NewTerminateUHostInstanceRequest()
+	req := Uclient.NewTerminateUHostInstanceRequest()
 	req.UHostId = uhostID
 
-	resp, err := uhostClient.TerminateUHostInstance(req)
+	resp, err := Uclient.TerminateUHostInstance(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return err
@@ -110,11 +110,11 @@ func DeleteHost(uhostClient *uhost.UHostClient, uhostID *string) error {
 }
 
 // GetHostIDs 获取 所有主机
-func GetHostIDs(uhostClient *uhost.UHostClient) []uhost.UHostInstanceSet {
+func GetHostIDs() []uhost.UHostInstanceSet {
 
-	req := uhostClient.NewDescribeUHostInstanceRequest()
+	req := Uclient.NewDescribeUHostInstanceRequest()
 
-	resp, err := uhostClient.DescribeUHostInstance(req)
+	resp, err := Uclient.DescribeUHostInstance(req)
 	if err != nil {
 		log.Infoln("[ERROR]", err)
 		return nil

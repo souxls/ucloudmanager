@@ -24,16 +24,15 @@ type Cred struct {
 
 // Host 配置
 type Host struct {
-	ImageID            string `toml: "ImageId"`
 	LoginMode          string
 	ChargeType         string
 	CPU                int
 	Memory             int
 	NetCapability      string
 	MachineType        string
-	MinimalCPUPlatform string `toml: "MinimalCpuPlatform"`
-	NetworkInterface   NetworkInterface
-	Disks              Disk
+	MinimalCpuPlatform string
+	NetworkInterface   []NetworkInterface
+	Disks              []Disk
 }
 
 // NetworkInterface 设置
@@ -60,17 +59,16 @@ func Init(cfgFile string) {
 		viper.AddConfigPath(".")
 		viper.SetConfigName("ucloud")
 	}
-
 	viper.AutomaticEnv() // read in environment variables that match
-
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
+
+		fmt.Println(viper.ConfigFileUsed())
 		err := viper.Unmarshal(&Cfg)
 		if err != nil {
 			fmt.Printf("解析配置文件出错, %v", err)
 			// 配置文件解析错误直接退出程序
 			os.Exit(1)
 		}
-
 	}
 }
