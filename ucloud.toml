@@ -14,6 +14,7 @@ NetworkInterface = [
 	{
 		Bandwidth =   100,
 		PayMode =    "Traffic",
+		# 可选 cn-sh1: Bgp cn-sh2: Bgp cn-gd: Bgp cn-bj1: Bgp cn-bj2:
 		OperatorName = "Bgp cn-sh2"
 	},
 ]
