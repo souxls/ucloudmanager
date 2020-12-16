@@ -61,14 +61,14 @@ func Init(cfgFile string) {
 	}
 	viper.AutomaticEnv() // read in environment variables that match
 	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-
-		fmt.Println(viper.ConfigFileUsed())
-		err := viper.Unmarshal(&Cfg)
-		if err != nil {
-			fmt.Printf("解析配置文件出错, %v", err)
-			// 配置文件解析错误直接退出程序
-			os.Exit(1)
-		}
+	err := viper.ReadInConfig()
+	if err != nil {
+		fmt.Println("配置文件读取失败", err)
+		os.Exit(1)
+	}
+	if err := viper.Unmarshal(&Cfg); err != nil {
+		fmt.Printf("解析配置文件出错, %v", err)
+		// 配置文件解析错误直接退出程序
+		os.Exit(1)
 	}
 }
