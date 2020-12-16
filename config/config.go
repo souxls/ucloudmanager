@@ -24,7 +24,6 @@ type Cred struct {
 
 // Host 配置
 type Host struct {
-	LoginMode          string
 	ChargeType         string
 	CPU                int
 	Memory             int

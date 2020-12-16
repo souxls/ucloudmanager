@@ -3,7 +3,6 @@ PublicKey = ""
 PrivateKey = ""
 
 [host]
-LoginMode = "Publickey"
 ChargeType = "Postpay"
 CPU = 8
 Memory = 8192
