@@ -57,6 +57,7 @@ func Init(cfgFile string) {
 	} else {
 		// Search config in current directory with name "ucloud" with no extension.
 		viper.AddConfigPath(".")
+		viper.AddConfigPath("/etc/ucloudmanager")
 		viper.SetConfigName("ucloud")
 	}
 	viper.AutomaticEnv() // read in environment variables that match
