@@ -37,9 +37,9 @@ type Host struct {
 
 // NetworkInterface 设置
 type NetworkInterface struct {
-	Bandwidth    int
-	PayMode      string
-	OperatorName string
+	Bandwidth int
+	PayMode   string
+	// OperatorName string
 }
 
 // Disk 配置
