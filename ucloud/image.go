@@ -56,7 +56,8 @@ func GetImages() []uhost.UHostImageSet {
 	}
 
 	for i := 0; i < len(resp.ImageSet); i++ {
-		fmt.Printf("ImageID: %s ImageName: %s \n", resp.ImageSet[i].ImageId, resp.ImageSet[i].ImageName)
+		imageInfo := resp.ImageSet[i]
+		fmt.Printf("ImageID: %s ImageName: %s State: %s \n", imageInfo.ImageId, imageInfo.ImageName, imageInfo.State)
 	}
 
 	return resp.ImageSet

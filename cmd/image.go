@@ -66,9 +66,9 @@ func init() {
 
 	imageCmd.AddCommand(createImageCmd)
 	createImageCmd.PersistentFlags().StringVar(&imgageName, "name", "", "Set image name.")
-	createImageCmd.PersistentFlags().StringVar(&HostID, "hostid", "", "Create image by hostid.")
+	createImageCmd.PersistentFlags().StringVar(&HostID, "hostID", "", "Create image by hostid.")
 	createImageCmd.MarkPersistentFlagRequired("name")
-	createImageCmd.MarkPersistentFlagRequired("hostid")
+	createImageCmd.MarkPersistentFlagRequired("hostID")
 
 	imageCmd.AddCommand(deleteImageCmd)
 	deleteImageCmd.PersistentFlags().StringVar(&imageID, "imageID", "", "delete image by imageid.")
