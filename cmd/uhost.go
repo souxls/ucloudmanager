@@ -36,7 +36,7 @@ var createUhostCmd = &cobra.Command{
 	Use:   "create",
 	Short: "create uhost",
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := ucloud.CreateHost(uhostName, imageName, zoneName, Region); err != nil {
+		if err := ucloud.CreateHost(uhostName, imageName, zoneName); err != nil {
 			fmt.Println("Host创建失败", err)
 		}
 	},
