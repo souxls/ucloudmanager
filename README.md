@@ -1,5 +1,17 @@
 # ucloud
+ucloud 云平台 uhost 和 镜像管理
 
+# 获取镜像ID
+```
+ucloudmanager image list
+ImageID: uimage-50c2fwwi ImageName: test1
+ImageID: uimage-ddjty5cm ImageName: test2
+```
+# 根据 ImageID 创建uhost
+```
+ucloudmanager uhost create --zone cn-sh2-01 --image uimage-ddjty5cm --name "test1-20201216"
+
+```
 # Usage
 ```
 ucloudmanager --help
