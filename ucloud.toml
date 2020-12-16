@@ -1,0 +1,26 @@
+[cred]
+PublicKey = "" "[ucloud_public_key]"
+PrivateKey = "[ucloud_private_key]"
+
+[host]
+LoginMode = "Publickey"
+ChargeType = "Postpay"
+CPU = 8
+Memory = 8192
+NetCapability = "Ultra"
+MachineType = "O"
+MinimalCpuPlatform = "Intel/Auto"
+NetworkInterface = [
+	{
+		Bandwidth:    100,
+		PayMode:      "Traffic",
+		OperatorName: "Bgp cn-sh2"
+	},
+]
+Disks = [
+	{
+		IsBoot: "True",
+		Size:   20,
+		Type:   "CLOUD_RSSD"
+	},
+]
