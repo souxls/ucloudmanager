@@ -51,7 +51,7 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "./ucloud.toml", "config file")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default: ./ucloud.toml /etc/ucloudmanager/ucloud.toml)")
 	rootCmd.PersistentFlags().StringVar(&Region, "region", "cn-sh2", "ucloud region. Support:cn-bj2 cn-sh2")
 }
 
