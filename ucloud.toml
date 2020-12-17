@@ -1,6 +1,6 @@
 [cred]
-PublicKey = "yXb9QMjIaNKsSvHVfyDf92Wjsab3cPw/KxhGVHD4Ds1EMZRCoEdTKs7cOLE="
-PrivateKey = "tRY4rBhAobQpYHlfLpc6UsNZZASddkEOivVjfoWhkJLno4XprESwDYbu3hiOpZ/P"
+PublicKey = "" 
+PrivateKey = ""
 
 [host]
 ChargeType = "Postpay"
