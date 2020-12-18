@@ -98,6 +98,7 @@ func DeleteHost(uhostID *string) error {
 
 	req := Uclient.NewTerminateUHostInstanceRequest()
 	req.UHostId = uhostID
+	req.ReleaseEIP = ucloud.Bool(true)
 
 	resp, err := Uclient.TerminateUHostInstance(req)
 	if err != nil {
