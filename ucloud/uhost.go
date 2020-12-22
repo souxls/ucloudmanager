@@ -19,7 +19,7 @@ import (
 func CreateHost(name, imageID, zone string) error {
 
 	h := config.Cfg.Host
-	pwd, err := password.Generate(16, 5, 5, false, false)
+	pwd, err := password.Generate(16, 5, 0, false, false)
 	req := Uclient.NewCreateUHostInstanceRequest()
 	req.Zone = ucloud.String(zone)
 	req.ImageId = ucloud.String(imageID)
