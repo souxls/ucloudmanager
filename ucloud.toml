@@ -8,13 +8,12 @@ CPU = 8
 Memory = 8192
 NetCapability = "Ultra"
 MachineType = "O"
+# 支持 "Intel/Auto, Amd/Epyc2"
 MinimalCpuPlatform = "Intel/Auto"
 NetworkInterface = [
 	{
 		Bandwidth =   100,
 		PayMode =    "Traffic"
-		# 可选 cn-sh1: Bgp cn-sh2: Bgp cn-gd: Bgp cn-bj1: Bgp cn-bj2:
-		# OperatorName = "Bgp cn-sh2"
 	},
 ]
 Disks = [
