@@ -7,6 +7,7 @@ package ucloud
 
 import (
 	"fmt"
+	"strings"
 	"ucloudmanager/config"
 	"ucloudmanager/log"
 
@@ -54,10 +55,20 @@ func CreateHost(name, imageID, zone string) error {
 
 	resp, err := Uclient.CreateUHostInstance(req)
 	if err != nil {
-		log.Infoln("[ERROR]", err)
+		if strings.Contains(err.Error(), "resource not enough") {
+			log.Errorln("资源不足", err)
+			if h.MinimalCpuPlatform == "Amd/Epyc2" {
+				req.MinimalCpuPlatform = ucloud.String("Intel/Auto")
+			} else {
+				req.MinimalCpuPlatform = ucloud.String("Amd/Epyc2")
+			}
+			resp, _ := Uclient.CreateUHostInstance(req)
+			log.Infoln("重新创建", resp)
+			return nil
+		}
 		return err
 	}
-	log.Infoln("[RESPONSE]", resp)
+	log.Debugln("[RESPONSE]", resp)
 	return nil
 }
 
@@ -69,11 +80,11 @@ func StartHost(uHostID *string) error {
 
 	resp, err := Uclient.StartUHostInstance(req)
 	if err != nil {
-		log.Infoln("[ERROR]", err)
+		log.Errorln("[ERROR]", err)
 		return err
 	}
 
-	log.Infoln("[RESPONSE]", resp)
+	log.Debugln("[RESPONSE]", resp)
 	return nil
 }
 
@@ -85,11 +96,11 @@ func StopHost(uhostID *string) error {
 
 	resp, err := Uclient.StopUHostInstance(req)
 	if err != nil {
-		log.Infoln("[ERROR]", err)
+		log.Errorln("[ERROR]", err)
 		return err
 	}
 
-	log.Infoln("[RESPONSE]", resp)
+	log.Debugln("[RESPONSE]", resp)
 	return nil
 }
 
@@ -102,11 +113,11 @@ func DeleteHost(uhostID *string) error {
 
 	resp, err := Uclient.TerminateUHostInstance(req)
 	if err != nil {
-		log.Infoln("[ERROR]", err)
+		log.Errorln("[ERROR]", err)
 		return err
 	}
 
-	log.Infoln("[RESPONSE]", resp)
+	log.Debugln("[RESPONSE]", resp)
 	return nil
 }
 
@@ -117,7 +128,7 @@ func GetHostIDs() []uhost.UHostInstanceSet {
 
 	resp, err := Uclient.DescribeUHostInstance(req)
 	if err != nil {
-		log.Infoln("[ERROR]", err)
+		log.Errorln("[ERROR]", err)
 		return nil
 	}
 
